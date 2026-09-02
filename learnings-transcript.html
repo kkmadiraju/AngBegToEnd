@@ -574,5 +574,30 @@ FullyQualifiedErrorId : UnauthorizedAccess</pre>
       while generating code, causing the recorded merge conflicts and incidental metadata files.
       They are not Angular features and are not imported by the application.
     </p>
+
+    <h2>8. Removing OneNote metadata</h2>
+
+    <section class="message user">
+      <div class="role">User prompt</div>
+      <p>delete all the onenote files in the application.</p>
+    </section>
+
+    <section class="message assistant">
+      <div class="role">Assistant response</div>
+      <p>
+        Searched the complete project tree for files with <code>.one</code>, <code>.onetoc2</code>,
+        or <code>.onetmp</code> extensions and files named <code>Open Notebook*</code>. Every
+        resolved target was verified to be inside the application workspace before deletion.
+      </p>
+      <p class="result">
+        Deleted 2,356 OneNote-related files totaling 12,974,704 bytes. A second recursive scan found
+        0 remaining OneNote files.
+      </p>
+      <p class="note">
+        The deletion is permanent rather than a recycle-bin operation. Most deleted files were
+        metadata copies under <code>node_modules</code>; Angular application source files were not
+        targeted.
+      </p>
+    </section>
   </body>
 </html>
