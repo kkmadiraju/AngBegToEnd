@@ -16,18 +16,11 @@ describe('App', () => {
     expect(app).toBeTruthy();
   });
 
-  it('should render the title and welcome message', async () => {
+  it('should render the architecture lab', async () => {
     const fixture = TestBed.createComponent(App);
     await fixture.whenStable();
     const compiled = fixture.nativeElement as HTMLElement;
-    expect(compiled.querySelector('h1')?.textContent).toContain('Welcome to todo!');
-    expect(compiled.querySelector('.message')?.textContent).toContain('Welcome to in28Minutes');
-  });
-
-  it('should include the welcome component', async () => {
-    const fixture = TestBed.createComponent(App);
-    await fixture.whenStable();
-    const compiled = fixture.nativeElement as HTMLElement;
-    expect(compiled.querySelector('app-welcome')).toBeTruthy();
+    expect(compiled.querySelector('app-architecture-lab')).toBeTruthy();
+    expect(compiled.querySelector('h1')?.textContent).toContain('Angular Architecture Lab');
   });
 });

@@ -1,0 +1,20 @@
+<article class="concept-card" [class.completed]="completed()">
+  <button class="select-button" type="button" (click)="selected.emit(concept().id)">
+    <span class="concept-icon" [style.background]="concept().color">{{ concept().icon }}</span>
+    <span class="concept-copy">
+      <strong>{{ concept().name }}</strong>
+      <span>{{ concept().summary }}</span>
+    </span>
+    <span class="open-indicator" aria-hidden="true">{{ active() ? '−' : '+' }}</span>
+  </button>
+
+  <button
+    class="complete-button"
+    type="button"
+    [attr.aria-pressed]="completed()"
+    (click)="completionToggled.emit(concept().id)"
+  >
+    <span aria-hidden="true">{{ completed() ? '✓' : '○' }}</span>
+    {{ completed() ? 'Learned' : 'Mark learned' }}
+  </button>
+</article>

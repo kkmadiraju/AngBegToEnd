@@ -1,0 +1,100 @@
+<main class="lab-shell">
+  <header class="hero">
+    <div>
+      <p class="eyebrow">Interactive Angular 21 demonstration</p>
+      <h1>{{ title }}</h1>
+      <p class="hero-copy">
+        Welcome to todo! Welcome to in28Minutes. Explore the eight building blocks from the
+        architecture diagram and mark each one as learned.
+      </p>
+      <app-welcome />
+    </div>
+
+    <aside class="progress-card" aria-label="Learning progress">
+      <span>Learning progress</span>
+      <strong>{{ completedCount() }} / {{ concepts().length }}</strong>
+      <div class="progress-track" aria-hidden="true">
+        <span [style.width.%]="progressPercent()"></span>
+      </div>
+      <small>{{ progressPercent() }}% complete</small>
+      <button type="button" (click)="reset()">Reset demo</button>
+    </aside>
+  </header>
+
+  <section class="binding-lab" aria-labelledby="binding-title">
+    <div>
+      <p class="section-kicker">Live data binding</p>
+      <h2 id="binding-title">Hello, {{ learnerName || 'Angular learner' }}!</h2>
+      <p>Interpolation, property, event, and two-way binding are active here.</p>
+    </div>
+
+    <label>
+      Learner name
+      <input [(ngModel)]="learnerName" placeholder="Enter your name" />
+    </label>
+
+    <button
+      class="counter-button"
+      type="button"
+      [disabled]="clickCount() >= 10"
+      (click)="increment()"
+    >
+      Event binding clicks: {{ clickCount() }}
+    </button>
+  </section>
+
+  <section aria-labelledby="concepts-title">
+    <div class="section-heading">
+      <div>
+        <p class="section-kicker">Architecture map</p>
+        <h2 id="concepts-title">Choose a concept to inspect</h2>
+      </div>
+      <p>The selected card is styled by the custom <code>appHighlight</code> directive.</p>
+    </div>
+
+    <div class="concept-grid">
+      @for (concept of concepts(); track concept.id) {
+        <app-concept-card
+          [concept]="concept"
+          [active]="isSelected(concept.id)"
+          [completed]="isCompleted(concept.id)"
+          [appHighlight]="concept.color"
+          [appHighlightActive]="isSelected(concept.id)"
+          (selected)="selectConcept($event)"
+          (completionToggled)="toggleCompleted($event)"
+        />
+      }
+    </div>
+  </section>
+
+  @if (selectedConcept(); as concept) {
+    <section class="detail-panel" [style.--concept-color]="concept.color" aria-live="polite">
+      <div class="detail-heading">
+        <span class="detail-icon">{{ concept.icon }}</span>
+        <div>
+          <p class="section-kicker">Selected feature</p>
+          <h2>{{ concept.name }}</h2>
+        </div>
+      </div>
+
+      <div class="detail-grid">
+        <div>
+          <h3>What this demo proves</h3>
+          <p>{{ concept.demonstration }}</p>
+          <h3>Files involved</h3>
+          <ul>
+            @for (file of concept.files; track file) {
+              <li>
+                <code>{{ file }}</code>
+              </li>
+            }
+          </ul>
+        </div>
+        <div>
+          <h3>Representative code</h3>
+          <pre><code>{{ concept.code }}</code></pre>
+        </div>
+      </div>
+    </section>
+  }
+</main>

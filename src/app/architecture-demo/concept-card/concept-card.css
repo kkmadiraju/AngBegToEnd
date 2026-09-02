@@ -1,0 +1,99 @@
+:host {
+  display: block;
+  border: 2px solid transparent;
+  border-radius: 1rem;
+  transition:
+    transform 180ms ease,
+    border-color 180ms ease,
+    box-shadow 180ms ease;
+}
+
+:host.is-highlighted {
+  border-color: var(--highlight-color);
+  box-shadow: 0 0 0 4px color-mix(in srgb, var(--highlight-color) 15%, transparent);
+  transform: translateY(-3px);
+}
+
+.concept-card {
+  height: 100%;
+  overflow: hidden;
+  background: white;
+  border: 1px solid #e2e8f0;
+  border-radius: 0.875rem;
+}
+
+.concept-card.completed {
+  background: #f8fff9;
+}
+
+button {
+  font: inherit;
+}
+
+.select-button {
+  width: 100%;
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  gap: 0.875rem;
+  align-items: start;
+  padding: 1rem;
+  color: #0f172a;
+  text-align: left;
+  background: transparent;
+  border: 0;
+  cursor: pointer;
+}
+
+.select-button:focus-visible,
+.complete-button:focus-visible {
+  outline: 3px solid #93c5fd;
+  outline-offset: -3px;
+}
+
+.concept-icon {
+  width: 2.5rem;
+  height: 2.5rem;
+  display: grid;
+  place-items: center;
+  color: white;
+  border-radius: 0.7rem;
+  font-size: 0.8rem;
+  font-weight: 800;
+}
+
+.concept-copy {
+  display: grid;
+  gap: 0.35rem;
+}
+
+.concept-copy strong {
+  font-size: 1rem;
+}
+
+.concept-copy span {
+  color: #64748b;
+  font-size: 0.82rem;
+  line-height: 1.45;
+}
+
+.open-indicator {
+  color: #64748b;
+  font-size: 1.4rem;
+  line-height: 1;
+}
+
+.complete-button {
+  width: 100%;
+  padding: 0.7rem 1rem;
+  color: #475569;
+  background: #f8fafc;
+  border: 0;
+  border-top: 1px solid #e2e8f0;
+  cursor: pointer;
+}
+
+.completed .complete-button {
+  color: #166534;
+  background: #f0fdf4;
+  font-weight: 700;
+}

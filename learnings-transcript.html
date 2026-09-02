@@ -109,6 +109,39 @@
         color: #4b5563;
         font-size: 9pt;
       }
+
+      table {
+        width: 100%;
+        margin: 10px 0 16px;
+        border-collapse: collapse;
+        font-size: 8.5pt;
+      }
+
+      th,
+      td {
+        padding: 7px;
+        vertical-align: top;
+        text-align: left;
+        border: 1px solid #d1d5db;
+      }
+
+      th {
+        color: #312e81;
+        background: #eef2ff;
+      }
+
+      .feature {
+        margin: 0 0 10px;
+        padding: 10px 12px;
+        border-left: 4px solid #7c3aed;
+        background: #f8fafc;
+        break-inside: avoid;
+      }
+
+      .feature h3 {
+        margin: 0 0 4px;
+        font-size: 10.5pt;
+      }
     </style>
   </head>
   <body>
@@ -258,5 +291,288 @@ FullyQualifiedErrorId : UnauthorizedAccess</pre>
         <code>http://127.0.0.1:4200/</code>.
       </p>
     </section>
+
+    <h2>7. Interactive Angular Architecture Lab</h2>
+
+    <section class="message user">
+      <div class="role">User prompt</div>
+      <p><code>angular-architecture (1).jpg</code></p>
+      <p>
+        Implement the features shown in the image in this application, in demoable fashion, record
+        all the ng commands used along with files produced. Document each feature that is
+        implemented in the pdf file. Keep updating single file do not generate multiple pdfs.
+      </p>
+    </section>
+
+    <section class="message assistant">
+      <div class="role">Assistant response</div>
+      <p>
+        Implemented a single interactive Angular Architecture Lab covering all eight concepts from
+        the reference image. The existing development server hot-reloaded the feature at
+        <code>http://127.0.0.1:4200/</code>.
+      </p>
+      <p class="result">
+        Verification: 13 tests passed in 6 test files, the production build succeeded, and a
+        headless-browser DOM check confirmed the rendered lab, binding controls, welcome component,
+        and all 8 architecture cards.
+      </p>
+    </section>
+
+    <h2>Implemented features</h2>
+
+    <div class="feature">
+      <h3>Dependency Injection</h3>
+      <p>
+        <code>ArchitectureLab</code> obtains <code>ArchitectureLearning</code> with
+        <code>inject()</code>. It also injects the typed <code>LAB_TITLE</code> token, which is
+        configured by the feature module. The title and shared learning state visibly come from
+        injected dependencies.
+      </p>
+    </div>
+
+    <div class="feature">
+      <h3>Modules</h3>
+      <p>
+        <code>DemoShellModule</code> imports and exports the standalone architecture lab and
+        provides the title token. The standalone root component consumes that NgModule,
+        demonstrating how module-packaged and standalone APIs interoperate in Angular 21.
+      </p>
+    </div>
+
+    <div class="feature">
+      <h3>Components</h3>
+      <p>
+        The page is split into reusable <code>ArchitectureLab</code>, <code>ConceptCard</code>, and
+        existing <code>Welcome</code> components. Inputs send concept/selection/completion state
+        into each card, while outputs send user actions back to the parent.
+      </p>
+    </div>
+
+    <div class="feature">
+      <h3>Templates</h3>
+      <p>
+        External HTML templates define the views. Angular's <code>@for</code> block renders the
+        eight cards and file lists; <code>@if</code> renders the selected concept detail panel.
+      </p>
+    </div>
+
+    <div class="feature">
+      <h3>Metadata</h3>
+      <p>
+        The implementation uses <code>@Component</code>, <code>@Directive</code>,
+        <code>@Injectable</code>, and <code>@NgModule</code> metadata. Selecting each concept
+        displays a representative metadata/code example and its participating files.
+      </p>
+    </div>
+
+    <div class="feature">
+      <h3>Data Binding</h3>
+      <p>
+        The live binding panel demonstrates interpolation for the greeting and counter, property
+        binding for disabled/progress/style values and child inputs, event binding for buttons and
+        child outputs, and two-way <code>[(ngModel)]</code> binding for the learner name.
+      </p>
+    </div>
+
+    <div class="feature">
+      <h3>Directives</h3>
+      <p>
+        The standalone <code>appHighlight</code> attribute directive sets a CSS custom property and
+        applies an active host class. Selecting a concept visibly highlights and raises that card.
+        Built-in binding and control-flow directives are also exercised throughout the templates.
+      </p>
+    </div>
+
+    <div class="feature">
+      <h3>Services</h3>
+      <p>
+        The root-provided <code>ArchitectureLearning</code> service owns the eight-item catalog,
+        completed-item set, computed count, and computed progress percentage. Marking cards learned
+        and resetting the lab prove that shared state and logic are separated from presentation.
+      </p>
+    </div>
+
+    <h2>Angular CLI command ledger</h2>
+
+    <table>
+      <thead>
+        <tr>
+          <th>Command used</th>
+          <th>Outcome and files produced</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>
+            <code
+              >ng generate component architecture-demo --standalone --skip-tests=false
+              --style=css</code
+            >
+          </td>
+          <td>
+            Stopped by an existing OneNote metadata-file merge conflict; no Angular component source
+            was produced.
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <code
+              >ng generate component architecture-demo/concept-card --standalone --skip-tests=false
+              --style=css</code
+            >
+          </td>
+          <td>
+            <code>concept-card.ts</code>, <code>concept-card.html</code>,
+            <code>concept-card.css</code>, <code>concept-card.spec.ts</code>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <code
+              >ng generate service architecture-demo/services/architecture-learning
+              --skip-tests=false</code
+            >
+          </td>
+          <td><code>architecture-learning.ts</code>, <code>architecture-learning.spec.ts</code></td>
+        </tr>
+        <tr>
+          <td>
+            <code
+              >ng generate directive architecture-demo/directives/highlight --standalone
+              --skip-tests=false</code
+            >
+          </td>
+          <td><code>highlight.ts</code>, <code>highlight.spec.ts</code></td>
+        </tr>
+        <tr>
+          <td><code>ng generate module architecture-demo/architecture-demo</code></td>
+          <td>
+            Stopped by the OneNote metadata-file merge conflict; no Angular module source was
+            produced.
+          </td>
+        </tr>
+        <tr>
+          <td><code>ng generate interface architecture-demo/models/architecture-concept</code></td>
+          <td><code>architecture-concept.ts</code></td>
+        </tr>
+        <tr>
+          <td>
+            <code
+              >ng generate component architecture-demo/architecture-lab --standalone
+              --skip-tests=false --style=css</code
+            >
+          </td>
+          <td>
+            Run four times: three attempts exposed parent/template OneNote conflicts; after
+            isolating those generated conflict files, it produced <code>architecture-lab.ts</code>,
+            <code>.html</code>, <code>.css</code>, and <code>.spec.ts</code>.
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <code
+              >ng generate component architecture-demo/architecture-lab --standalone
+              --skip-tests=false --style=css --force</code
+            >
+          </td>
+          <td>
+            One retry; still stopped because the conflict was a binary OneNote metadata file rather
+            than an overwriteable Angular source file.
+          </td>
+        </tr>
+        <tr>
+          <td><code>ng generate module architecture-demo/demo-shell</code></td>
+          <td>
+            Run twice: the initial attempt hit the OneNote conflict; the successful retry produced
+            <code>demo-shell/demo-shell-module.ts</code>.
+          </td>
+        </tr>
+        <tr>
+          <td><code>ng generate module architecture-demo/demo-shell --force</code></td>
+          <td>One retry; it still stopped at the binary metadata conflict.</td>
+        </tr>
+        <tr>
+          <td><code>ng test --watch=false</code></td>
+          <td>
+            The first run found an invalid direct directive-constructor test. After correcting the
+            test to use an Angular host component, the second run passed all 13 tests.
+          </td>
+        </tr>
+        <tr>
+          <td><code>ng build</code></td>
+          <td>
+            Produced the optimized application in <code>dist/kiran-first-angular-app</code>; main
+            bundle raw size was 246.93 kB.
+          </td>
+        </tr>
+        <tr>
+          <td><code>ng serve --host 127.0.0.1</code></td>
+          <td>
+            The existing development server rebuilt the changed files and served the demo at
+            <code>http://127.0.0.1:4200/</code>.
+          </td>
+        </tr>
+      </tbody>
+    </table>
+
+    <h2>Implementation file map</h2>
+
+    <table>
+      <thead>
+        <tr>
+          <th>File</th>
+          <th>Purpose</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><code>architecture-lab/architecture-lab.ts|html|css</code></td>
+          <td>Interactive parent feature, external template, and responsive visual design.</td>
+        </tr>
+        <tr>
+          <td><code>architecture-lab/architecture-lab.spec.ts</code></td>
+          <td>Lab creation, eight-card rendering, and event-binding tests.</td>
+        </tr>
+        <tr>
+          <td><code>concept-card/concept-card.ts|html|css</code></td>
+          <td>Reusable input/output card component.</td>
+        </tr>
+        <tr>
+          <td><code>concept-card/concept-card.spec.ts</code></td>
+          <td>Required-input and rendered-metadata tests.</td>
+        </tr>
+        <tr>
+          <td><code>services/architecture-learning.ts|spec.ts</code></td>
+          <td>Injectable catalog/progress service and state tests.</td>
+        </tr>
+        <tr>
+          <td><code>directives/highlight.ts|spec.ts</code></td>
+          <td>Custom host-styling directive and Angular-host test.</td>
+        </tr>
+        <tr>
+          <td><code>models/architecture-concept.ts</code></td>
+          <td>Typed concept ID union and concept interface.</td>
+        </tr>
+        <tr>
+          <td><code>demo-shell/demo-shell-module.ts</code></td>
+          <td>NgModule packaging, export, and token provider.</td>
+        </tr>
+        <tr>
+          <td><code>tokens/lab-title.ts</code></td>
+          <td>Typed dependency-injection token; added during implementation.</td>
+        </tr>
+        <tr>
+          <td><code>app.ts|html|css|spec.ts</code></td>
+          <td>Root integration and architecture-lab rendering test.</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <p class="note">
+      Environment note: OneNote's <code>Open Notebook.onetoc2</code> metadata exists inside multiple
+      project and schematic directories. Angular CLI attempted to copy these unrelated binary files
+      while generating code, causing the recorded merge conflicts and incidental metadata files.
+      They are not Angular features and are not imported by the application.
+    </p>
   </body>
 </html>

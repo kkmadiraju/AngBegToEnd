@@ -1,14 +1,11 @@
-import { Component, signal } from '@angular/core';
+import { Component } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
-import { Welcome } from './welcome/welcome';
+import { DemoShellModule } from './architecture-demo/demo-shell/demo-shell-module';
 
 @Component({
   selector: 'app-root',
-  imports: [RouterOutlet, Welcome],
+  imports: [RouterOutlet, DemoShellModule],
   templateUrl: './app.html',
   styleUrl: './app.css',
 })
-export class App {
-  protected readonly title = signal('todo');
-  protected readonly message = 'Welcome to in28Minutes';
-}
+export class App {}
