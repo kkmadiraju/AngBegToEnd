@@ -1,0 +1,262 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>Angular Learning Log</title>
+    <style>
+      @page {
+        size: A4;
+        margin: 17mm;
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      body {
+        margin: 0;
+        color: #1f2937;
+        font:
+          10.5pt/1.5 'Segoe UI',
+          Arial,
+          sans-serif;
+      }
+
+      h1 {
+        margin: 0 0 4px;
+        color: #111827;
+        font-size: 23pt;
+      }
+
+      h2 {
+        margin: 24px 0 12px;
+        padding-bottom: 5px;
+        color: #312e81;
+        border-bottom: 2px solid #e0e7ff;
+        font-size: 15pt;
+      }
+
+      .subtitle {
+        margin: 0 0 22px;
+        color: #6b7280;
+        font-size: 9.5pt;
+      }
+
+      .message {
+        margin: 0 0 13px;
+        padding: 12px 14px;
+        border: 1px solid #d1d5db;
+        border-radius: 7px;
+        break-inside: avoid;
+      }
+
+      .user {
+        border-left: 5px solid #2563eb;
+        background: #eff6ff;
+      }
+
+      .assistant {
+        border-left: 5px solid #059669;
+        background: #ecfdf5;
+      }
+
+      .role {
+        margin-bottom: 6px;
+        color: #374151;
+        font-size: 8.5pt;
+        font-weight: 700;
+        letter-spacing: 0.06em;
+        text-transform: uppercase;
+      }
+
+      p {
+        margin: 5px 0;
+      }
+
+      ul {
+        margin: 7px 0 3px;
+        padding-left: 20px;
+      }
+
+      li {
+        margin: 3px 0;
+      }
+
+      pre {
+        margin: 9px 0 0;
+        padding: 11px;
+        overflow-wrap: anywhere;
+        white-space: pre-wrap;
+        border-radius: 5px;
+        background: #111827;
+        color: #f9fafb;
+        font:
+          8.5pt/1.4 Consolas,
+          'Courier New',
+          monospace;
+      }
+
+      code {
+        font-family: Consolas, 'Courier New', monospace;
+      }
+
+      .result {
+        color: #047857;
+        font-weight: 650;
+      }
+
+      .note {
+        color: #4b5563;
+        font-size: 9pt;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Angular Learning Log</h1>
+    <p class="subtitle">
+      Prompts, responses, implementation notes, and verified outcomes | Updated 2 September 2026
+    </p>
+
+    <h2>1. Fixing the Angular CLI PowerShell error</h2>
+
+    <section class="message user">
+      <div class="role">User prompt</div>
+      <p>What is the issue and fix this</p>
+      <p class="note">The attached screenshot showed:</p>
+      <pre>
+PS C:\Projects\...\kiran-first-angular-app&gt; ng build
+ng : File C:\Users\kiran\AppData\Roaming\npm\ng.ps1 cannot be loaded because running scripts is disabled on this system.
+CategoryInfo          : SecurityError: (:) [], PSSecurityException
+FullyQualifiedErrorId : UnauthorizedAccess</pre>
+    </section>
+
+    <section class="message assistant">
+      <div class="role">Assistant response</div>
+      <p>
+        The Angular project was not the problem. PowerShell was blocking the
+        <code>ng.ps1</code> launcher because the effective execution policy was
+        <code>Restricted</code>.
+      </p>
+      <p>The current-user policy was changed with:</p>
+      <pre>Set-ExecutionPolicy -Scope CurrentUser -ExecutionPolicy RemoteSigned</pre>
+      <p>
+        This scopes the change to the current Windows account and continues to block unsigned
+        scripts downloaded from the internet.
+      </p>
+      <p class="result">
+        <code>ng build</code> then completed successfully and generated
+        <code>dist\kiran-first-angular-app</code>.
+      </p>
+    </section>
+
+    <h2>2. Creating the learning document</h2>
+
+    <section class="message user">
+      <div class="role">User prompt</div>
+      <p>Add all the prompts and responses to be saved to learnings.pdf</p>
+    </section>
+
+    <section class="message assistant">
+      <div class="role">Assistant response</div>
+      <p>
+        Created and validated <code>learnings.pdf</code> in the project root with the prompts, error
+        transcription, diagnosis, applied fix, and build verification.
+      </p>
+    </section>
+
+    <h2>3. Reviewing the Angular 7 backup</h2>
+
+    <section class="message user">
+      <div class="role">User prompt</div>
+      <p><code>Backup-02-After-Creating-Welcome-Component.zip</code></p>
+      <p>What are the features included in this zip file?</p>
+    </section>
+
+    <section class="message assistant">
+      <div class="role">Assistant response</div>
+      <p>The ZIP is an early Angular 7 Todo application snapshot containing:</p>
+      <ul>
+        <li>
+          A root component showing <code>Welcome to todo!</code>,
+          <code>Welcome to in28Minutes</code>, an Angular logo, and placeholder component content.
+        </li>
+        <li>
+          A registered <code>WelcomeComponent</code> rendered through
+          <code>&lt;app-welcome&gt;</code>, displaying <code>welcome works!</code>.
+        </li>
+        <li>Routing infrastructure and a router outlet, but no configured routes.</li>
+        <li>Development and production build configurations.</li>
+        <li>
+          Karma/Jasmine unit tests, Protractor E2E setup, TSLint, and scripts for serving, building,
+          testing, linting, and E2E testing.
+        </li>
+      </ul>
+      <p>
+        It does not yet contain Todo CRUD, authentication, API integration, persistence, forms,
+        navigation pages, or meaningful application styling. Some generated tests also appear stale
+        after the welcome additions.
+      </p>
+    </section>
+
+    <h2>4. Adding comparable features to Angular 21</h2>
+
+    <section class="message user">
+      <div class="role">User prompt</div>
+      <p>Add similar features in the current application</p>
+    </section>
+
+    <section class="message assistant">
+      <div class="role">Assistant response</div>
+      <p>The relevant backup features were implemented using current Angular 21 conventions:</p>
+      <ul>
+        <li>Replaced the default Angular starter screen with a responsive welcome page.</li>
+        <li>Added the <code>todo</code> title and <code>Welcome to in28Minutes</code> message.</li>
+        <li>Created and embedded a standalone <code>Welcome</code> component.</li>
+        <li>Added an Angular-style visual mark and component-content section.</li>
+        <li>Retained the router outlet and existing empty route configuration.</li>
+        <li>Added component tests and updated the root application tests.</li>
+      </ul>
+      <p class="result">
+        Verification: 5 tests passed across 2 test files, and the production build completed
+        successfully.
+      </p>
+      <p class="note">
+        An unrelated OneNote metadata file changed externally during the work and was intentionally
+        left untouched.
+      </p>
+    </section>
+
+    <h2>5. Ongoing updates</h2>
+
+    <section class="message user">
+      <div class="role">User prompt</div>
+      <p>Keep updating the learnings.pdf</p>
+    </section>
+
+    <section class="message assistant">
+      <div class="role">Assistant response</div>
+      <p>
+        <code>learnings.pdf</code> was updated with the ZIP review, Angular 21 implementation,
+        tests, build results, and this request. A maintainable HTML transcript source was retained
+        so later conversation updates can be appended consistently.
+      </p>
+    </section>
+
+    <h2>6. Running the application</h2>
+
+    <section class="message user">
+      <div class="role">User prompt</div>
+      <p>run the project</p>
+    </section>
+
+    <section class="message assistant">
+      <div class="role">Assistant response</div>
+      <p>The Angular development server was started with:</p>
+      <pre>npm start -- --host 127.0.0.1</pre>
+      <p class="result">
+        The application responded with HTTP 200 and is available at
+        <code>http://127.0.0.1:4200/</code>.
+      </p>
+    </section>
+  </body>
+</html>
